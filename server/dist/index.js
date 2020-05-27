@@ -4,17 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const db_1 = __importDefault(require("./api/db"));
+const routes_1 = __importDefault(require("./routes"));
 const app = express_1.default();
-// const pool = new sql.ConnectionPool({
-//   database: 'farmShop',
-//   server: 'localhost\\SQLEXPRESS',
-//   driver: 'msnodesqlv8',
-//   options: {
-//     trustedConnection: true
-//   }
-// })
-// tslint:disable-next-line:no-console
-const server = app.listen(process.env.APPPORT, () => console.log("RUN!"));
+app.use(cors_1.default());
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use(routes_1.default.login);
+app.use(routes_1.default.register);
+db_1.default.connect().then(() => {
+    // tslint:disable-next-line:no-console
+    app.listen(process.env.APP_PORT, () => console.log(`App on port: ${process.env.APP_PORT}`));
+});
 //# sourceMappingURL=index.js.map
