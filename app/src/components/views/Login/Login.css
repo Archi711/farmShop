@@ -1,0 +1,21 @@
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  min-width: 40vw;
+  margin: 8rem auto;
+}
+
+.loginForm__heading{
+  text-align: center;
+}
+
+.loginForm__footer{
+  text-align: right;
+  margin: .3em;
+}
+
+.loginForm__submitBtn{
+  width: 80%;
+  margin: .3em auto;
+}
