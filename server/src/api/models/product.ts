@@ -8,6 +8,7 @@ class Products extends Table{
   IDType : Column<number> = null
   Quantity : Column<number> = null
   Price : Column<number> = null
+  ImageURL : Column<string> = null
   IDFarm : Column<number> = null
   Description : Column<string> = null
   constructor(){
