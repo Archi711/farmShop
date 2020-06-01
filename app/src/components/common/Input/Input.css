@@ -1,0 +1,25 @@
+.input__label{
+  display: block;
+  width: 80%;
+  margin: .3em auto;
+}
+
+.input__field{
+  margin: .3em auto .3em;
+  width: 80%;
+  display: block;
+  padding: .4em;
+  font-size: 1.3em;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.input__field-valid{
+  border-bottom-color: #04724D;
+}
+.input__field-invalid{
+  border-bottom-color: #A50104;
+}

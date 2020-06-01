@@ -1,5 +1,7 @@
 /app/node_modules
 /app/dist
+/app/README.md
+/server/dist
 /server/node_modules
 /server/.env
-/server/dist
+.vscode
