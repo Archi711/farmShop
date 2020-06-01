@@ -1,0 +1,41 @@
+.registerForm{
+  display: grid;
+  width: 60%;
+  min-width: 50vw;
+  margin: 3em auto;
+  gap: .5em;
+  grid-template-areas: 
+    "mH"
+    "sH"
+    "fs"
+    "btn";
+}
+
+.registerForm__heading{
+  grid-area: mH;
+}
+.registerForm__subHeading{
+  grid-area: sH;
+  opacity: 0.6;
+  margin-bottom: .5em;
+}
+.registerForm__fieldsetContainer{
+  grid-area: fs;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 24px;
+  margin-bottom: .5em;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -o-border-radius: 24px;
+  box-shadow: 0px 0px 3px 0px #000;
+}
+.registerForm__fieldset{
+  border: none;
+  display: flex;
+  flex-shrink: 0;
+}
+.registerForm__submitBtn{
+  grid-area: btn;
+}

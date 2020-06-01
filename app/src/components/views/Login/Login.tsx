@@ -8,6 +8,7 @@ import './Login.css'
 
 export default function Login(){
   const store = React.useContext(StateContext)
+  const [isLoading, setLoading] = React.useState(false)
   const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.target as HTMLFormElement)
@@ -20,6 +21,9 @@ export default function Login(){
       }
     })
   }
+  React.useEffect(() => {
+    setLoading(store.state.isLoading)
+  }, [store.state.isLoading, store.state.error])
   return store.state.auth ? <Redirect to="/"></Redirect> : (
     <form onSubmit={handleSubmit} className="loginForm">
       <h1 className="loginForm__heading">FarmShop</h1>
@@ -38,7 +42,7 @@ export default function Login(){
         name='submit'
         type="submit"
         variant="primary">
-          Zaloguj
+          {isLoading ? "Loading..." : "Zaloguj" }
       </Button>
       <div className="loginForm__footer">
         jeśli nie masz konta

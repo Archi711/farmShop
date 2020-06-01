@@ -1,0 +1,38 @@
+.modal{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100%;
+  background-color: #00000044;
+  z-index: 1;
+}
+
+.modal__container{
+  width: 80%;
+  background-color: #FFF;
+  margin: 7rem auto;
+  z-index: 2;
+  min-width: 40vw;
+  min-height: 20vh;
+  border-radius: 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -o-border-radius: 24px;
+  border: 1px solid #00000088;
+  padding: 1em;
+}
+
+.modal__heading{
+  text-align: left;
+  display: flex;
+  justify-content: flex-end;
+  max-height: 30px;
+}
+
+.modal__closeBtn{
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}

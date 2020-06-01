@@ -16,3 +16,10 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
+
+.input__field-valid{
+  border-bottom-color: #04724D;
+}
+.input__field-invalid{
+  border-bottom-color: #A50104;
+}
