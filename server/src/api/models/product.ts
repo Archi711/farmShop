@@ -4,7 +4,7 @@ import columnSetter from './columnSetter'
 
 class Products extends Table{
   ProductID : Column<number> = null
-  Name : Column<string> = null
+  ProductName : Column<string> = null
   IDType : Column<number> = null
   Quantity : Column<number> = null
   Price : Column<number> = null

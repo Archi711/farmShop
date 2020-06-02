@@ -15,6 +15,7 @@ app.use(express.urlencoded({extended: true}))
 
 app.use(routes.login)
 app.use(routes.register)
+app.use(routes.products)
 
 pool.connect().then(() => {
   // tslint:disable-next-line:no-console

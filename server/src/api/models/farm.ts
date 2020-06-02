@@ -4,7 +4,7 @@ import Column from "../types/column"
 
 class Farms extends Table{
   FarmID : Column<number> = null
-  Name : Column<string> = null
+  FarmName : Column<string> = null
   IDAddress : Column<number> = null
   constructor(){
     super()
