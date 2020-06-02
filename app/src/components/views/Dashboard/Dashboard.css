@@ -1,0 +1,19 @@
+.header{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: .5em 1em;
+  box-shadow: 3px 0px 8px 0 #000;
+}
+.header__icons{
+  text-align: right;
+}
+
+.header__logoutBtn{
+  margin: .8em;
+}
+
+.main{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}

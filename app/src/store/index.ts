@@ -3,11 +3,6 @@ import { Dispatch } from 'react'
 import axios from 'axios'
 
 
-export interface AppState {
-  auth: boolean,
-  isLoading: boolean,
-  error: Error | null
-}
 type ErrorCode = 1 | 2 | 3
 enum ErrorMessage {
   "Logowanie nie powiodło się - sprawdź dane i spróbuj ponownie" = 1,
@@ -37,16 +32,33 @@ export type RegisterData = {
 export type Action =
   { type: 'LOGIN', payload: LoginData, status?: number, response?: any } |
   { type: 'REGISTER', payload: RegisterData, status?: number } |
-  { type: 'TOGGLE_LOADING' }
-
+  { type: 'TOGGLE_LOADING' } |
+  { type: 'FETCH_PRODUCTS', status?: number, response?: any }
+export interface Product{
+  ProductID : number,
+  ProductName : string,
+  ProductTypeName : string,
+  Quantity: number,
+  Price : number,
+  ImageURL : string,
+  FarmName : string,
+  Description : string,
+}
+export interface AppState {
+  auth: boolean,
+  isLoading: boolean,
+  error: Error | null,
+  products : Product[] | null
+}
 export const initialState: AppState = {
   auth: false,
   isLoading: false,
   error: null,
+  products : null
 }
 
 export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) => {
-  dispatch({type : "TOGGLE_LOADING"})
+  dispatch({ type: "TOGGLE_LOADING" })
   switch (action.type) {
     case "LOGIN": {
       new Promise((resolve, reject) => {
@@ -92,31 +104,60 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
       })
       break
     }
+    case "FETCH_PRODUCTS": {
+      new Promise((resolve, reject) => {
+        axios.get("http://localhost:3001/products")
+        .then(res => res.status === 200 ? resolve(res.data) : reject())
+        .catch(e => reject())
+      })
+      .then(v => {
+        action.response = v;
+        action.status = 200;
+        dispatch(action)
+      })
+      .catch(e => {
+        action.status = 500;
+        dispatch(action)
+      })
+      break
+    }
   }
 }
 
 export const reducer = (state: AppState, action: Action): AppState => {
+  state = {...state, isLoading : false}
   switch (action.type) {
     case "LOGIN": {
-      if (action.status === 200) return { ...state, auth: true, isLoading: false, error : null }
+      if (action.status === 200) return { ...state, auth: true, error: null }
       else return {
+        ...state,
         auth: false,
-        isLoading: false,
         error: new Error(1)
       }
     }
     case "REGISTER": {
-      if (action.status === 200) return { ...state, auth: false, isLoading: false, error : null }
+      if (action.status === 200) return { ...state, auth: false, error: null }
       else return {
+        ...state,
         auth: false,
-        isLoading: false,
         error: new Error(3)
       }
     }
-    case "TOGGLE_LOADING" : {
+    case "FETCH_PRODUCTS" : {
+      return action.status === 200 ? 
+      {
+        ...state,
+        products : action.response
+      } :
+      {
+        ...state,
+        error : new Error(3)
+      }
+    }
+    case "TOGGLE_LOADING": {
       return {
         ...state,
-        isLoading : true
+        isLoading: true
       }
     }
     default: {

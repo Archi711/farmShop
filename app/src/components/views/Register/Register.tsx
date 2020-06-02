@@ -4,7 +4,6 @@ import Input from '../../common/Input/Input'
 import { StateContext } from '../../../store'
 import { useModal, Modal } from '../../common/Modal/Modal'
 import { Link } from 'react-router-dom'
-import * as spinner from '../../../../../load.svg'
 import './Register.css'
 
 export default function Register() {
@@ -41,7 +40,7 @@ export default function Register() {
       <Modal isShowing={isShowing} toggle={toggle}>
         {
           isLoading ? "Loading..." :
-          !store.state.error ? "Błąd!" : <div>Rejestracja powiodła się! <Link to="/login">Zaloguj się!</Link></div>
+          store.state.error ? "Błąd!" : <div>Rejestracja powiodła się! <Link to="/login">Zaloguj się!</Link></div>
         }
       </Modal>
       <form className="registerForm" onSubmit={handleSubmit}>

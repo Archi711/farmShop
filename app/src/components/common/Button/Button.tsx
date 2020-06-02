@@ -2,7 +2,7 @@ import React, { ReactChild } from 'react'
 import './Button.css'
 
 export interface ButtonProps{
-  variant : "primary" | "secondary"
+  variant : "primary" | "secondary" | "warning" | "danger"
   name: string
   handler? : () => any
   children : ReactChild
@@ -11,14 +11,12 @@ export interface ButtonProps{
 }
 
 export default function Button(props : ButtonProps){
-
-  let classnames = props.variant === "primary" ? "btn-primary" : "btn-secondary"
   return (
     <button
       type={props.type}
       onClick={props.handler}
       name={props.name}
-      className={`btn ${classnames} ${props.className}`}>
+      className={`btn btn-${props.variant} ${props.className}`}>
       {props.children}
     </button>
   )

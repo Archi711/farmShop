@@ -1,8 +1,25 @@
+button{
+  --color: #888;
+}
+.btn-primary{
+  --color: #003049;
+}
+.btn-secondary{
+  --color: #04724D;
+}
+.btn-warning{
+  --color: #FF7F11;
+}
+.btn-danger{
+  --color: #D62828;
+}
+
+
 .btn {
   padding: 1rem;
-  background-color: #04724D;
+  background-color: var(--color);
   color: #f4f4f9;
-  border: 2px solid #04724D;
+  border: 2px solid var(--color);
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -11,6 +28,7 @@
 }
 
 .btn:hover{
-  background-color: #f4f4f9;
-  color : #04724D
+  cursor: pointer;
+  background-color: transparent;
+  color : var(--color);
 }
