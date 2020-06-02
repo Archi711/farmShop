@@ -14,10 +14,12 @@ export default function ProductList(){
   return (
     <section className="productList">
       <h3 className="productList__heading">Lista produktów:</h3>
+      <ul className="productList__list">
       {
         store.state.products ? 
-        store.state.products.map(product => <ProductListElement product={product} key={product.ProductID} />): ""
+        store.state.products.map((product,idx) => <ProductListElement product={product} key={idx} idx={idx} />): ""
       }
+      </ul>
     </section>
   )
 }

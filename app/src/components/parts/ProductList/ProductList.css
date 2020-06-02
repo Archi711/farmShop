@@ -1,8 +1,19 @@
 .productList{
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.productList__list{
+  display: flex;
+  flex-direction: column;
   overflow: hidden scroll;
   scrollbar-width: none;
+}
+.productList__list::-webkit-scrollbar{
+  width: 0px;
+  background: transparent;
+  display: block;
 }
 
 .productList__heading{

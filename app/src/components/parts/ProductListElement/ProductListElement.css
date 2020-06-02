@@ -1,0 +1,21 @@
+.productListElement{
+  list-style-type: none;
+  padding: .5em;
+  display: grid;
+  grid-template-columns: 1fr 4em;
+  border-bottom: 1px solid #ccc;
+}
+
+.productListElement__heading{
+  line-height: 3.5em;
+}
+
+.productListElement:hover{
+  background-color: #dcdcdc;
+}
+
+.productListElement__img{
+  max-height: 4em;
+  display: block;
+  
+}

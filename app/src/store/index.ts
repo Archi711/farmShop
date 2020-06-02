@@ -33,7 +33,8 @@ export type Action =
   { type: 'LOGIN', payload: LoginData, status?: number, response?: any } |
   { type: 'REGISTER', payload: RegisterData, status?: number } |
   { type: 'TOGGLE_LOADING' } |
-  { type: 'FETCH_PRODUCTS', status?: number, response?: any }
+  { type: 'FETCH_PRODUCTS', status?: number, response?: any } |
+  { type: 'SET_ACTIVE_PRODUCT', payload: number }
 export interface Product{
   ProductID : number,
   ProductName : string,
@@ -48,13 +49,15 @@ export interface AppState {
   auth: boolean,
   isLoading: boolean,
   error: Error | null,
-  products : Product[] | null
+  products : Product[] | null,
+  activeProduct : Product | null,
 }
 export const initialState: AppState = {
   auth: false,
   isLoading: false,
   error: null,
-  products : null
+  products : null,
+  activeProduct : null,
 }
 
 export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) => {
@@ -121,6 +124,7 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
       })
       break
     }
+    default: dispatch(action)
   }
 }
 
@@ -152,6 +156,12 @@ export const reducer = (state: AppState, action: Action): AppState => {
       {
         ...state,
         error : new Error(3)
+      }
+    }
+    case "SET_ACTIVE_PRODUCT" : {
+      return {
+        ...state,
+        activeProduct : state.products ? state.products[action.payload] : null
       }
     }
     case "TOGGLE_LOADING": {
