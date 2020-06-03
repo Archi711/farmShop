@@ -1,0 +1,50 @@
+.productBrowser__emptyNotif{
+  text-align: center;
+  color: #00000066;
+}
+
+.productBrowser{
+  margin-top: 10px;
+  display: grid;
+  grid-template-areas: 
+    "img nameH"
+    "det det";
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.productBrowser__img{
+  grid-area: img;
+  max-height: 15em;
+}
+.productBrowser__nameHeading{
+  grid-area: nameH;
+  text-align: center;
+}
+.productBrowser__details{
+  grid-area: det;
+  width: 100%;
+}
+.productBrowser__buyPanel{
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.buyPanel__form{
+  margin: 0 1em;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid: 1fr / 1fr 1fr;
+}
+
+.buyPanel__label{
+  margin: 0 1em;
+}
+
+.buyPanel__buyBtn{
+  margin: 0 1em;
+}

@@ -3,6 +3,7 @@
   padding: .5em;
   display: grid;
   grid-template-columns: 1fr 4em;
+  cursor: pointer;
   border-bottom: 1px solid #ccc;
 }
 

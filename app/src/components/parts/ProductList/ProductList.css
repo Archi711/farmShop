@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
+  max-height: calc( 85vh - 10px );
 }
 
 .productList__list{

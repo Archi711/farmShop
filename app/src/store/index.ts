@@ -31,10 +31,13 @@ export type RegisterData = {
 }
 export type Action =
   { type: 'LOGIN', payload: LoginData, status?: number, response?: any } |
+  { type: 'LOGOUT'} |
   { type: 'REGISTER', payload: RegisterData, status?: number } |
   { type: 'TOGGLE_LOADING' } |
   { type: 'FETCH_PRODUCTS', status?: number, response?: any } |
-  { type: 'SET_ACTIVE_PRODUCT', payload: number }
+  { type: 'SET_ACTIVE_PRODUCT', payload: number } |
+  { type: 'ADD_TO_CART', payload : CartItem } |
+  { type: 'REMOVE_FROM_CART', payload : number}
 export interface Product{
   ProductID : number,
   ProductName : string,
@@ -45,12 +48,20 @@ export interface Product{
   FarmName : string,
   Description : string,
 }
+
+export interface CartItem{
+  itemID : number,
+  quantity : number,
+  price : number,
+}
+
 export interface AppState {
   auth: boolean,
   isLoading: boolean,
   error: Error | null,
   products : Product[] | null,
   activeProduct : Product | null,
+  cart : CartItem[],
 }
 export const initialState: AppState = {
   auth: false,
@@ -58,6 +69,7 @@ export const initialState: AppState = {
   error: null,
   products : null,
   activeProduct : null,
+  cart : []
 }
 
 export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) => {
@@ -139,6 +151,9 @@ export const reducer = (state: AppState, action: Action): AppState => {
         error: new Error(1)
       }
     }
+    case "LOGOUT" : {
+      return initialState
+    }
     case "REGISTER": {
       if (action.status === 200) return { ...state, auth: false, error: null }
       else return {
@@ -164,12 +179,26 @@ export const reducer = (state: AppState, action: Action): AppState => {
         activeProduct : state.products ? state.products[action.payload] : null
       }
     }
+    case "ADD_TO_CART" : {
+      return {
+        ...state,
+        cart : [...state.cart, action.payload]
+      }
+    }
+    case "REMOVE_FROM_CART" : {
+      return {
+        ...state,
+        cart : state.cart.filter((e,i) => i !== action.payload)
+      }
+    }
+
     case "TOGGLE_LOADING": {
       return {
         ...state,
         isLoading: true
       }
     }
+    
     default: {
       console.log("reducer!")
       return state

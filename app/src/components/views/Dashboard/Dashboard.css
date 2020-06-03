@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   padding: .5em 1em;
   box-shadow: 3px 0px 8px 0 #000;
+  max-height: 15vh;
 }
 .header__icons{
   text-align: right;
@@ -16,4 +17,7 @@
   margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  align-items: center;
+  justify-items: center;
+  max-height: calc( 85vh - 10px );
 }
