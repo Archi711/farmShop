@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './views/Login/Login'
 import Register from './views/Register/Register'
 import Dashboard from './views/Dashboard/Dashboard'
+import Cart from './views/Cart/Cart'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { reducer, StateContext, initialState, asyncMiddleware } from '../store'
 import PrivateRoute from './common/PrivateRoute'
@@ -19,6 +20,9 @@ function App() {
           <Route path="/register">
             <Register></Register>
           </Route>
+          <PrivateRoute path="/cart">
+            <Cart />
+          </PrivateRoute>
           <PrivateRoute>
             <Dashboard></Dashboard>
           </PrivateRoute>

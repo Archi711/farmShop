@@ -176,7 +176,7 @@ export const reducer = (state: AppState, action: Action): AppState => {
     case "SET_ACTIVE_PRODUCT" : {
       return {
         ...state,
-        activeProduct : state.products ? state.products[action.payload] : null
+        activeProduct : state.products ? state.products.filter(p => p.ProductID === action.payload)[0] : null
       }
     }
     case "ADD_TO_CART" : {

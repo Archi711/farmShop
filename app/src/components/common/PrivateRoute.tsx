@@ -7,6 +7,7 @@ export default function PrivateRoute(props : any){
   const store = useContext(StateContext)
   return (
     <Route
+      path={props.path}
       render={
         ({location}) =>
           store.state.auth ?

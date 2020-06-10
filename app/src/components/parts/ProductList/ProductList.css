@@ -3,6 +3,7 @@
   flex-direction: column;
   overflow: hidden;
   width: 100%;
+  height: calc( 85vh - 10px );;
   max-height: calc( 85vh - 10px );
 }
 

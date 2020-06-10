@@ -40,7 +40,7 @@ export default function Register() {
       <Modal isShowing={isShowing} toggle={toggle}>
         {
           isLoading ? "Loading..." :
-          store.state.error ? "Błąd!" : <div>Rejestracja powiodła się! <Link to="/login">Zaloguj się!</Link></div>
+          store.state.error ? store.state.error.msg : <div>Rejestracja powiodła się! <Link to="/login">Zaloguj się!</Link></div>
         }
       </Modal>
       <form className="registerForm" onSubmit={handleSubmit}>
