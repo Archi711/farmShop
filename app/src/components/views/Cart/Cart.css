@@ -1,0 +1,29 @@
+.cart{
+  margin-top: 10px;
+  max-height: calc(85vh - 10px);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-areas: 
+    "tab tab tab"
+    "details submit goback";
+}
+
+.cart__itemsTable{
+  grid-area: tab;
+}
+
+.cart__details{
+  grid-area: details;
+  padding: 1em;
+}
+
+.cart__submit{
+  grid-area: submit;
+  margin: 0 auto;
+}
+
+.cart__goBack{
+  grid-area: goback;
+  margin: 0 auto;
+}

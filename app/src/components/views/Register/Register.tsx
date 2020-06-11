@@ -55,7 +55,7 @@ export default function Register() {
               labelText="Login: "
             ></Input>
             <Input
-              type="text"
+              type="password"
               required={true}
               name="password"
               labelText="Hasło: "

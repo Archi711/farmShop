@@ -22,7 +22,7 @@ export default function ProductBrowser(){
       payload : {
         itemID : store.state.activeProduct?.ProductID as number,
         quantity : quantity,
-        price : quantity * (store.state.activeProduct?.Price as number)
+        price : +(quantity * (store.state.activeProduct?.Price as number)).toFixed(2)
       }
     })
     toggle()

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Dispatch } from 'react'
 import axios from 'axios'
 
+const API_ADDRESS = "http://localhost:3001"
 
 type ErrorCode = 1 | 2 | 3
 enum ErrorMessage {
@@ -55,6 +56,15 @@ export interface CartItem{
   price : number,
 }
 
+export interface User{
+  Name : string,
+  Surname : string,
+  Nick : string,
+  Address : string,
+  City : string,
+  ZipCode : number,  
+}
+
 export interface AppState {
   auth: boolean,
   isLoading: boolean,
@@ -62,6 +72,7 @@ export interface AppState {
   products : Product[] | null,
   activeProduct : Product | null,
   cart : CartItem[],
+  user : User | null,
 }
 export const initialState: AppState = {
   auth: false,
@@ -69,7 +80,8 @@ export const initialState: AppState = {
   error: null,
   products : null,
   activeProduct : null,
-  cart : []
+  cart : [],
+  user : null,
 }
 
 export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) => {
@@ -77,13 +89,13 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
   switch (action.type) {
     case "LOGIN": {
       new Promise((resolve, reject) => {
-        axios.post("http://localhost:3001/login", {
+        axios.post(API_ADDRESS+"/login", {
           nick: action.payload.login,
           password: action.payload.password
         }).then(res => {
           if (res.status === 200) {
             action.status = 200
-            action.response = res
+            action.response = res.data
             resolve(res)
           }
           else reject()
@@ -95,7 +107,7 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
     case "REGISTER": {
       let data = action.payload as RegisterData
       new Promise((resolve, reject) => {
-        axios.post("http://localhost:3001/register", {
+        axios.post(API_ADDRESS+"/register", {
           address: [
             data.address,
             data.city,
@@ -121,7 +133,7 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
     }
     case "FETCH_PRODUCTS": {
       new Promise((resolve, reject) => {
-        axios.get("http://localhost:3001/products")
+        axios.get(API_ADDRESS+"/products")
         .then(res => res.status === 200 ? resolve(res.data) : reject())
         .catch(e => reject())
       })
@@ -144,7 +156,14 @@ export const reducer = (state: AppState, action: Action): AppState => {
   state = {...state, isLoading : false}
   switch (action.type) {
     case "LOGIN": {
-      if (action.status === 200) return { ...state, auth: true, error: null }
+      if (action.status === 200){
+        return { 
+          ...state, 
+          auth: true, 
+          error: null,
+          user : action.response.values[0]
+        }
+      } 
       else return {
         ...state,
         auth: false,
@@ -188,7 +207,7 @@ export const reducer = (state: AppState, action: Action): AppState => {
     case "REMOVE_FROM_CART" : {
       return {
         ...state,
-        cart : state.cart.filter((e,i) => i !== action.payload)
+        cart : state.cart.filter((e,i) => e.itemID !== action.payload)
       }
     }
 

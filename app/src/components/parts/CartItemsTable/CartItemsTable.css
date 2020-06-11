@@ -1,0 +1,25 @@
+.cartTable{
+  box-sizing: border-box;
+  padding: 1em;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.cartTable__caption{
+  font-size: 1.7em;
+  padding: .3em;
+}
+
+.cartTable tbody tr:nth-child(2n+1) {
+  background-color: #00000022;
+}
+
+.cartTable * tr td {
+  border: 1px solid #aaa;
+  padding: .5em;
+}
+
+.cartTable__thead, .cartTable__tfoot{
+  font-size: 1.4em;
+  font-weight: 600;
+}
