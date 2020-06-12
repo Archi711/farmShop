@@ -4,6 +4,8 @@ import ProductType from './productType'
 import Farm from './farm'
 import Address from './address'
 import User from './user'
+import Order from './order'
+import ProductHistory from './productHistory'
 
 
 
@@ -12,5 +14,7 @@ export default {
   ProductType,
   Farm,
   Address,
-  User
+  User,
+  Order,
+  ProductHistory
 }

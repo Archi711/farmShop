@@ -1,6 +1,7 @@
 import Column from './types/column'
 import Table from './types/table'
 import ConditionType from './types/conditionType'
+import UpdateType from './types/updateType'
 class Query {
   queryString: string = ""
   tables: Set<string> = new Set<string>()
@@ -43,6 +44,21 @@ class Query {
     const columnNames = Object.keys(table).filter((key, i) => key !== "TABLE_NAME" && i > 1).map(key => key).join(',')
     const values = data.map(el => typeof el === "string" ? `'${el}'` : el)
     this.queryString = `INSERT ${table.TABLE_NAME} (${columnNames}) OUTPUT inserted.${Object.keys(table)[1]} VALUES (${values})`
+    return this
+  }
+  update(table : Table, column : Column<any>, value : any, type: UpdateType) : Query{
+    if(this.queryString.includes("UPDATE")) return this
+    let result = `UPDATE ${table.TABLE_NAME} SET ${column.name} = `
+    switch(type){
+      case UpdateType.value : {
+        result += value
+      }
+      default: {
+        result += `${column.name} ${type === UpdateType.inc ? '+' : '-'} ${value}`
+      }
+    }
+
+    this.queryString = result
     return this
   }
   run(): string {

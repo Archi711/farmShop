@@ -3,6 +3,7 @@
 ## TODO NOW
 
 1. Update AVAILABLE product quanTITIES
+2. add transactions table, updating etc etc
 
 ## TODO
 

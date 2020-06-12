@@ -30,7 +30,7 @@ export default function Login() {
 
   React.useEffect(() => {
     if (store.state.error) toggle()
-  }, [store.state.error])
+  }, [store.state.error, toggle])
 
   return store.state.auth ? <Redirect to="/"></Redirect> : (
     <form onSubmit={handleSubmit} className="loginForm">

@@ -39,7 +39,7 @@ export default function Register() {
     <>
       <Modal isShowing={isShowing} toggle={toggle}>
         {
-          isLoading ? "Loading..." :
+          isLoading ? "Wczytywanie" :
           store.state.error ? store.state.error.msg : <div>Rejestracja powiodła się! <Link to="/login">Zaloguj się!</Link></div>
         }
       </Modal>

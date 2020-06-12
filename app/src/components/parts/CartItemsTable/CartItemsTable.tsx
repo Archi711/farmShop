@@ -1,6 +1,5 @@
 import React, { useContext }from 'react'
 import { StateContext} from '../../../store'
-import Button from '../../common/Button/Button'
 import CartItemRow from '../CartItem/CartItem'
 import './CartItemsTable.css'
 

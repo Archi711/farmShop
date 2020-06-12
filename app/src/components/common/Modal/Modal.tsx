@@ -1,10 +1,7 @@
-import React, { useState, ReactChild, useEffect } from 'react'
+import React, { useState, ReactChild } from 'react'
 import ReactDOM from 'react-dom'
 import './Modal.css'
 
-// export interface initialModalState{
-//   show : boolean,
-// }
 
 export const useModal = (show : boolean) => {
   const [isShowing, setShowing] = useState(show)

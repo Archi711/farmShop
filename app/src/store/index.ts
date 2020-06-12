@@ -30,6 +30,11 @@ export type RegisterData = {
   city: string,
   zipCode: string
 }
+export type OrderData = {
+  cartItems : CartItem[],
+  UserID : number,
+  TotalPrice : string,
+}
 export type Action =
   { type: 'LOGIN', payload: LoginData, status?: number, response?: any } |
   { type: 'LOGOUT'} |
@@ -38,7 +43,8 @@ export type Action =
   { type: 'FETCH_PRODUCTS', status?: number, response?: any } |
   { type: 'SET_ACTIVE_PRODUCT', payload: number } |
   { type: 'ADD_TO_CART', payload : CartItem } |
-  { type: 'REMOVE_FROM_CART', payload : number}
+  { type: 'REMOVE_FROM_CART', payload : number} | 
+  { type: 'MAKE_ORDER', payload : OrderData, status?: number, response?: any}
 export interface Product{
   ProductID : number,
   ProductName : string,
@@ -57,6 +63,7 @@ export interface CartItem{
 }
 
 export interface User{
+  UserID : number,
   Name : string,
   Surname : string,
   Nick : string,
@@ -84,7 +91,7 @@ export const initialState: AppState = {
   user : null,
 }
 
-export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) => {
+export const asyncMiddleware = (dispatch: Dispatch<Action>) => async (action: Action) => {
   dispatch({ type: "TOGGLE_LOADING" })
   switch (action.type) {
     case "LOGIN": {
@@ -148,6 +155,26 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => (action: Action) 
       })
       break
     }
+    case "MAKE_ORDER" : {
+      await new Promise((resolve, reject) => {
+        axios.post(API_ADDRESS+"/products/order", {
+          cartItems : action.payload.cartItems,
+          UserID : action.payload.UserID,
+          TotalPrice: action.payload.TotalPrice
+        })
+        .then(res => {
+          action.status = res.status
+          resolve()
+        })
+        .catch(res => {
+          action.status = res.status
+          action.response = res
+          reject()
+        })
+      })
+    dispatch(action)
+    break;
+    }
     default: dispatch(action)
   }
 }
@@ -191,6 +218,18 @@ export const reducer = (state: AppState, action: Action): AppState => {
         ...state,
         error : new Error(3)
       }
+    }
+    case "MAKE_ORDER" : {
+      return action.status === 200 ?
+        {
+          ...state,
+          cart : [],
+          activeProduct : null,
+        } :
+        {
+          ...state,
+          error : new Error(action.response.code)
+        }
     }
     case "SET_ACTIVE_PRODUCT" : {
       return {
