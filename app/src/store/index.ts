@@ -98,7 +98,8 @@ export const asyncMiddleware = (dispatch: Dispatch<Action>) => async (action: Ac
       new Promise((resolve, reject) => {
         axios.post(API_ADDRESS+"/login", {
           nick: action.payload.login,
-          password: action.payload.password
+          password: action.payload.password,
+          isAdmin : 0,
         }).then(res => {
           if (res.status === 200) {
             action.status = 200

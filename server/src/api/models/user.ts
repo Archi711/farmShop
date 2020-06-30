@@ -10,6 +10,7 @@ class Users extends Table{
   Name : Column<string> = null
   Surname : Column<string> = null
   IDAddress : Column<number> = null
+  isAdmin : Column<0 | 1> = null
   constructor(){
     super()
     columnSetter(this)

@@ -52,6 +52,7 @@ class Query {
     switch(type){
       case UpdateType.value : {
         result += value
+        break
       }
       default: {
         result += `${column.name} ${type === UpdateType.inc ? '+' : '-'} ${value}`
@@ -59,6 +60,11 @@ class Query {
     }
 
     this.queryString = result
+    return this
+  }
+  delete() : Query{
+    if(this.queryString.includes("DELETE")) return this
+    this.queryString = "DELETE"
     return this
   }
   run(): string {

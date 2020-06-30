@@ -11,7 +11,7 @@ router.post("/login", (req, res) => {
     .select([models.User.UserID, models.User.Name, models.User.Surname, models.User.Nick, models.Address.Address, models.Address.City, models.Address.ZipCode])
     .from()
     .join([[models.User.IDAddress, models.Address.AddressID]])
-    .where([models.User.Password, models.User.Nick], ConditionType.EQUAL, [req.body.password, req.body.nick])
+    .where([models.User.Password, models.User.Nick, models.User.isAdmin], ConditionType.EQUAL, [req.body.password, req.body.nick, req.body.isAdmin])
 
   pool.request().query(getUser.run()).then((v) => {
     if (v.recordset.length === 1) {

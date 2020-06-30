@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
     })
 
   const registerQuery = new queryBuilder()
-  .insert(models.User, [...regData, IDAddress])
+  .insert(models.User, [...regData, IDAddress, 0])
   .test()
 
   await pool.request().query(registerQuery.run())
