@@ -2,6 +2,9 @@ import Column from './types/column'
 import Table from './types/table'
 import ConditionType from './types/conditionType'
 import UpdateType from './types/updateType'
+/**
+ * Utility class used to build SQL queries
+ */
 class Query {
   queryString: string = ""
   tables: Set<string> = new Set<string>()
